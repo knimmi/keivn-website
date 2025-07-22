@@ -1,33 +1,185 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const navbarHTML = `
-  <div class="navbar">
-    <div class="logo">Kevin</div>
-    <nav>
-      <ul>
-        <li><a href="/index.html">Home</a></li>
-        <li><a href="/pages/about.html">About</a></li>
-        <li><a href="/pages/commands.html">Commands</a></li>
-        <li><a href="/pages/plans.html">Pricing</a></li>
-        <li><a href="/pages/faq.html">FAQ</a></li>
-      </ul>
-    </nav>
-    <div class="nav-buttons">
-      <a href="#" class="donate-btn">Donate</a>
-      <a href="https://discord.gg/kevinbot" class="premium-btn">Premium</a>
-    </div>
-  </div>
-  `;
+class Navbar {
+  constructor(placeholderId) {
+    this.placeholderId = placeholderId;
+    this.navbarHTML = `
+      <div class="navbar">
+        <div class="logo">Kevin</div>
+        <button class="hamburger" aria-label="Toggle navigation">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+        <nav class="nav-menu">
+          <ul>
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/pages/about.html">About</a></li>
+            <li><a href="/pages/commands.html">Commands</a></li>
+            <li><a href="/pages/plans.html">Pricing</a></li>
+            <li><a href="/pages/faq.html">FAQ</a></li>
+          </ul>
+        </nav>
+        <div class="nav-buttons">
+          <a href="#" class="donate-btn">Donate</a>
+          <a href="https://discord.gg/kevinbot" class="premium-btn">Premium</a>
+        </div>
+      </div>
+    `;
 
-  const placeholder = document.getElementById("navbar-placeholder");
-  if (placeholder) {
-    placeholder.innerHTML = navbarHTML;
+    this.navbarCSS = `
+      /* Navbar styles */
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 50px;
+        background: #0b0c1a;
+        flex-wrap: wrap;
+        position: relative;
+        z-index: 1000;
+      }
+      .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: #6a8dff;
+      }
+      nav ul {
+        display: flex;
+        gap: 25px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      nav a {
+        color: white;
+        font-weight: 500;
+        transition: color 0.3s;
+        text-decoration: none;
+        position: relative;
+      }
+      nav a:hover {
+        color: #6a8dff;
+      }
+      nav a.active {
+        color: #6a8dff;
+        border-bottom: 2px solid #6a8dff;
+        padding-bottom: 4px;
+      }
+      nav a.active::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 100%;
+        height: 2px;
+        background-color: #6a8dff;
+        border-radius: 2px;
+      }
+      .nav-buttons a {
+        margin-left: 15px;
+        padding: 8px 15px;
+        border-radius: 5px;
+        font-weight: bold;
+        font-size: 14px;
+        text-decoration: none;
+      }
+      .donate-btn {
+        background-color: #4a56ff;
+        color: white;
+      }
+      .premium-btn {
+        background-color: #2d2e3f;
+        color: #ff47c2;
+        border: 1px solid #ff47c2;
+      }
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+        z-index: 1100;
+      }
+      .hamburger .bar {
+        width: 25px;
+        height: 3px;
+        background-color: white;
+        border-radius: 3px;
+        transition: all 0.3s ease;
+      }
+      .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+      }
+      .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+      }
+      @media (max-width: 768px) {
+        .hamburger {
+          display: flex;
+        }
+        .nav-menu {
+          display: none;
+          flex-direction: column;
+          width: 100%;
+          background-color: #0b0c1a;
+          margin-top: 20px;
+          padding: 0 50px 20px;
+        }
+        .nav-menu.active {
+          display: flex;
+        }
+        .nav-menu ul {
+          flex-direction: column;
+          gap: 15px;
+        }
+        .nav-buttons {
+          display: none;
+        }
+      }
+    `;
+  }
 
+  injectStyles() {
+    if (!document.getElementById("navbar-styles")) {
+      const styleTag = document.createElement("style");
+      styleTag.id = "navbar-styles";
+      styleTag.innerHTML = this.navbarCSS;
+      document.head.appendChild(styleTag);
+    }
+  }
+
+  render() {
+    const placeholder = document.getElementById(this.placeholderId);
+    if (!placeholder) {
+      console.warn(`Navbar placeholder with id '${this.placeholderId}' not found.`);
+      return;
+    }
+
+    placeholder.innerHTML = this.navbarHTML;
+
+    // Highlight current page link
     const currentPath = window.location.pathname;
-
-    document.querySelectorAll("nav a").forEach((link) => {
+    placeholder.querySelectorAll("nav a").forEach(link => {
       if (link.getAttribute("href") === currentPath) {
         link.classList.add("active");
       }
     });
+
+    // Setup hamburger toggle
+    const hamburger = placeholder.querySelector(".hamburger");
+    const navMenu = placeholder.querySelector(".nav-menu");
+    hamburger?.addEventListener("click", () => {
+      hamburger.classList.toggle("active");
+      navMenu.classList.toggle("active");
+    });
   }
-});
+
+  init() {
+    this.injectStyles();
+    this.render();
+  }
+}
