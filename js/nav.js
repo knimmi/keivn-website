@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <li><a href="/index.html">Home</a></li>
         <li><a href="/pages/about.html">About</a></li>
         <li><a href="/pages/commands.html">Commands</a></li>
-        <li><a href="/pages/team.html">Team</a></li>
+        <li><a href="/pages/plans.html">Pricing</a></li>
         <li><a href="/pages/faq.html">FAQ</a></li>
       </ul>
     </nav>
@@ -24,9 +24,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const currentPath = window.location.pathname;
 
-    document.querySelectorAll('nav a').forEach(link => {
-      if (link.getAttribute('href') === currentPath) {
-        link.classList.add('active');
+    document.querySelectorAll("nav a").forEach((link) => {
+      if (link.getAttribute("href") === currentPath) {
+        link.classList.add("active");
       }
     });
   }
