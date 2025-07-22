@@ -1,0 +1,122 @@
+/* Reset & base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #0b0c1a;
+  color: white;
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  background: #0b0c1a;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #6a8dff;
+}
+
+nav ul {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+}
+
+nav a {
+  color: white;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #6a8dff;
+}
+
+.nav-buttons a {
+  margin-left: 15px;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.donate-btn {
+  background-color: #4a56ff;
+  color: white;
+}
+
+.premium-btn {
+  background-color: #2d2e3f;
+  color: #ff47c2;
+  border: 1px solid #ff47c2;
+}
+
+/* Hero Section */
+.hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 80px 50px;
+}
+
+.hero-text {
+  max-width: 600px;
+}
+
+.hero-text h1 {
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.buttons {
+  margin: 20px 0;
+}
+
+.invite-btn {
+  background-color: #2ecc71;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 5px;
+  margin-right: 10px;
+  display: inline-block;
+}
+
+.get-premium-btn {
+  background-color: #2d2e3f;
+  border: 1px solid #ff47c2;
+  color: #ff47c2;
+  padding: 12px 20px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.description {
+  max-width: 500px;
+  font-size: 16px;
+  color: #c4c4c4;
+}
+
+.hero-image img {
+  width: 300px;
+  max-width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.4);
+}
