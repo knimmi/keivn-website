@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
     </nav>
     <div class="nav-buttons">
       <a href="#" class="donate-btn">Donate</a>
-      <a href="#" class="premium-btn">Premium</a>
+      <a href="https://discord.gg/kevinbot" class="premium-btn">Premium</a>
     </div>
   </div>
   `;
