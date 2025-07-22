@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <li><a href="/index.html">Home</a></li>
         <li><a href="/pages/about.html">About</a></li>
         <li><a href="/pages/commands.html">Commands</a></li>
-        <li><a href="/index.html">Team</a></li>
+        <li><a href="/pages/team.html">Team</a></li>
         <li><a href="/pages/faq.html">FAQ</a></li>
       </ul>
     </nav>
@@ -16,10 +16,18 @@ document.addEventListener("DOMContentLoaded", function () {
       <a href="#" class="premium-btn">Premium</a>
     </div>
   </div>
-`;
+  `;
 
   const placeholder = document.getElementById("navbar-placeholder");
   if (placeholder) {
     placeholder.innerHTML = navbarHTML;
+
+    const currentPath = window.location.pathname;
+
+    document.querySelectorAll('nav a').forEach(link => {
+      if (link.getAttribute('href') === currentPath) {
+        link.classList.add('active');
+      }
+    });
   }
 });
