@@ -5,8 +5,8 @@ class Footer {
     this.footerHTML = `
 <footer class="footer">
   <div class="social-icons">
-    <a href="#"><img src="../images/youtube.png" alt="YouTube"></a>
-    <a href="#"><img src="../images/discord.png" alt="Discord"></a>
+    <a href="https://www.youtube.com/@kevlnbot"><img src="../images/youtube.png" alt="YouTube"></a>
+    <a href="https://discord.gg/kevinbot"><img src="../images/discord.png" alt="Discord"></a>
   </div>
 
   <div class="footer-links">
