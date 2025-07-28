@@ -1,113 +1,158 @@
 class Footer {
-  constructor(placeholderId) {
+  /**
+   * Create a Footer instance.
+   * @param {string} placeholderId - The ID of the container element where footer will be injected.
+   * @param {object} options - Optional configuration for links, styles, and copyright.
+   */
+  constructor(placeholderId, options = {}) {
     this.placeholderId = placeholderId;
 
-    this.footerHTML = `
-<footer class="footer">
-  <div class="social-icons">
-    <a href="https://www.youtube.com/@kevlnbot"><img src="../images/youtube.png" alt="YouTube"></a>
-    <a href="https://discord.gg/kevinbot"><img src="../images/discord.png" alt="Discord"></a>
-  </div>
+    this.socialLinks = options.socialLinks || [
+      { href: "https://www.youtube.com/@kevlnbot", imgSrc: "../images/youtube.png", alt: "YouTube" },
+      { href: "https://discord.gg/kevinbot", imgSrc: "../images/discord.png", alt: "Discord" },
+    ];
 
-  <div class="footer-links">
-    <a href="#">Privacy Policy</a>
-    <span>|</span>
-    <a href="#">Terms of Service</a>
-    <span>|</span>
-    <a href="https://discord.gg/kevinbot">Contact Us on Discord</a>
-  </div>
+    this.footerLinks = options.footerLinks || [
+      { href: "#", text: "Privacy Policy" },
+      { href: "#", text: "Terms of Service" },
+      { href: "https://discord.gg/kevinbot", text: "Contact Us on Discord" },
+    ];
 
-  <div class="copyright">
-    &copy; 2025 Made By Sigma Knimmi.
-  </div>
-</footer>`;
+    this.cssPath = options.cssPath || "../css/footer.css";
 
-    this.footerCSS = `
-body {
-  margin: 0;
-  padding: 0;
-  background-color: #0e0f11;
-  font-family: Arial, sans-serif;
-  color: white;
-}
+    this.placeholder = null;
+    this.styleInjected = false;
 
-.footer {
-  background-color: #0d0d0d;
-  color: #aaa;
-  text-align: center;
-  padding: 20px 10px;
-  font-size: 14px;
-  border-top: 1px solid #2a2a2a;
-}
-
-.social-icons {
-  margin-bottom: 15px;
-}
-
-.social-icons a {
-  margin: 0 8px;
-  display: inline-block;
-}
-
-.social-icons img {
-  width: 20px;
-  height: 20px;
-  filter: brightness(0.7);
-  transition: filter 0.3s;
-}
-
-.social-icons img:hover {
-  filter: brightness(1);
-}
-
-.footer-links {
-  margin-bottom: 10px;
-}
-
-.footer-links a {
-  color: #ccc;
-  text-decoration: none;
-  margin: 0 5px;
-}
-
-.footer-links span {
-  color: #555;
-}
-
-.footer-links a:hover {
-   color: #6a8dff
-}
-
-
-.copyright {
-  font-size: 14px;
-  color: #aaa;
-}`;
+    this.copyright =
+      options.copyright || "&copy; 2025 Made By Sigma Knimmi.";
   }
 
+  /**
+   * Inject stylesheet into document head if not already present.
+   */
   injectStyles() {
     if (!document.getElementById("footer-styles")) {
-      const styleTag = document.createElement("style");
-      styleTag.id = "footer-styles";
-      styleTag.innerHTML = this.footerCSS;
-      document.head.appendChild(styleTag);
+      const linkTag = document.createElement("link");
+      linkTag.id = "footer-styles";
+      linkTag.rel = "stylesheet";
+      linkTag.href = this.cssPath;
+      document.head.appendChild(linkTag);
+      this.styleInjected = true;
     }
   }
 
+  /**
+   * Remove injected stylesheet if it was added by this instance.
+   */
+  removeStyles() {
+    if (this.styleInjected) {
+      const styleTag = document.getElementById("footer-styles");
+      if (styleTag) styleTag.remove();
+      this.styleInjected = false;
+    }
+  }
+
+  /**
+   * Validate URLs to avoid broken links.
+   * @param {string} url
+   * @returns {boolean}
+   */
+  isValidURL(url) {
+    try {
+      new URL(url);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  /**
+   * Generate HTML string for one social icon link.
+   * @param {object} link
+   * @returns {string}
+   */
+  createSocialIcon(link) {
+    return `<a href="${link.href}" target="_blank" rel="noopener noreferrer"><img src="${link.imgSrc}" alt="${link.alt}"></a>`;
+  }
+
+  /**
+   * Generate HTML string for all social icon links.
+   * @returns {string}
+   */
+  generateSocialIcons() {
+    return this.socialLinks
+      .filter(({ href }) => this.isValidURL(href))
+      .map(link => this.createSocialIcon(link))
+      .join("");
+  }
+
+  /**
+   * Generate HTML string for one footer text link.
+   * @param {object} link
+   * @returns {string}
+   */
+  createFooterLink(link) {
+    const href = this.isValidURL(link.href) || link.href === "#" ? link.href : "#";
+    return `<a href="${href}">${link.text}</a>`;
+  }
+
+  /**
+   * Generate HTML string for all footer text links separated by '|'.
+   * @returns {string}
+   */
+  generateFooterLinks() {
+    return this.footerLinks
+      .map((link, i) => `${this.createFooterLink(link)}${i < this.footerLinks.length - 1 ? '<span>|</span>' : ''}`)
+      .join("");
+  }
+
+  /**
+   * Generate complete footer HTML.
+   * @returns {string}
+   */
+  generateFooterHTML() {
+    return `
+      <footer class="footer" role="contentinfo" aria-label="Footer">
+        <div class="social-icons">${this.generateSocialIcons()}</div>
+        <div class="footer-links">${this.generateFooterLinks()}</div>
+        <div class="copyright">${this.copyright}</div>
+      </footer>
+    `;
+  }
+
+  /**
+   * Render footer content inside placeholder.
+   */
   render() {
-    const placeholder = document.getElementById(this.placeholderId);
-    if (!placeholder) {
-      console.warn(
-        `Footer placeholder with id '${this.placeholderId}' not found.`
-      );
+    if (!this.placeholder) {
+      console.warn(`Footer placeholder with id '${this.placeholderId}' not found.`);
       return;
     }
-
-    placeholder.innerHTML = this.footerHTML;
+    this.placeholder.innerHTML = this.generateFooterHTML();
   }
 
+  /**
+   * Remove footer content and styles from DOM.
+   */
+  destroy() {
+    if (this.placeholder) {
+      this.placeholder.innerHTML = "";
+    }
+    this.removeStyles();
+  }
+
+  /**
+   * Initialize footer by caching placeholder, injecting styles, and rendering content.
+   */
   init() {
+    this.placeholder = document.getElementById(this.placeholderId);
+    if (!this.placeholder) {
+      console.warn(`Footer placeholder with id '${this.placeholderId}' not found.`);
+      return;
+    }
     this.injectStyles();
     this.render();
   }
 }
+
+export default Footer;

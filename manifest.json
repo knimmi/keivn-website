@@ -1,0 +1,20 @@
+{
+  "name": "KevinBot Website",
+  "short_name": "KevinBot",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0e0f11",
+  "theme_color": "#0d0d0d",
+  "icons": [
+    {
+      "src": "images/kevin-logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "images/goat.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
