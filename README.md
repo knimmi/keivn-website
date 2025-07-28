@@ -1,10 +1,10 @@
 # keivn-website
 
-A simple personal website built with HTML, CSS, and JavaScript.
+A simple website built with HTML, CSS, and JavaScript.
 
 ## Overview
 
-This project is a clean, lightweight portfolio/personal website showcasing basic web development skills using vanilla JavaScript, HTML5, and CSS3. It's designed to be responsive and easy to customize.
+This project is a cleanand lightweight. Its a website for a discord bot using vanilla JavaScript, HTML5, and CSS3. It's designed to be responsive and easy to customize.
 
 ## Features
 
@@ -12,10 +12,6 @@ This project is a clean, lightweight portfolio/personal website showcasing basic
 - Smooth scrolling navigation
 - Clean and minimalistic design
 - Basic JavaScript interactions
-
-## Demo
-
-You can check out the live version of the website here: [Insert your live site URL if available]
 
 ## Installation
 
