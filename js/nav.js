@@ -155,7 +155,9 @@ class Navbar {
   render() {
     const placeholder = document.getElementById(this.placeholderId);
     if (!placeholder) {
-      console.warn(`Navbar placeholder with id '${this.placeholderId}' not found.`);
+      console.warn(
+        `Navbar placeholder with id '${this.placeholderId}' not found.`
+      );
       return;
     }
 
@@ -163,7 +165,7 @@ class Navbar {
 
     // Highlight current page link
     const currentPath = window.location.pathname;
-    placeholder.querySelectorAll("nav a").forEach(link => {
+    placeholder.querySelectorAll("nav a").forEach((link) => {
       if (link.getAttribute("href") === currentPath) {
         link.classList.add("active");
       }

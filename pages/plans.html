@@ -1,64 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Premium Plans</title>
-<link rel="stylesheet" href="../css/plans.css" />
-<script src="../js/nav.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Premium Plans</title>
+    <link rel="stylesheet" href="../css/plans.css" />
+    <script src="../js/nav.js"></script>
     <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const navbar = new Navbar("navbar-placeholder");
-    navbar.init();
-  });
-</script>
-</head>
-<body>
-        <header>
+      document.addEventListener("DOMContentLoaded", () => {
+        const navbar = new Navbar("navbar-placeholder");
+        navbar.init();
+      });
+    </script>
+    <script src="js/footer.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const footer = new Footer("footer-placeholder");
+        footer.init();
+      });
+    </script>
+  </head>
+  <body>
+    <header>
       <div id="navbar-placeholder"></div>
     </header>
 
-  <div class="container">
-    <h1>Premium Plans</h1>
-    <p class="subtitle">Choose the plan that best suits your needs.</p>
+    <div class="container">
+      <h1>Premium Plans</h1>
+      <p class="subtitle">Choose the plan that best suits your needs.</p>
 
-    <div class="plans">
-      <div class="plan">
-        <h2>Free</h2>
-        <div class="price">Free</div>
-        <ul class="features">
-          <li>Kevin Bot taxi accounts</li>
-          <li>10 seconds cooldown</li>
-          <li>Standard Support</li>
-        </ul>
-        <button onclick="window.location.href='https://discord.gg/kevinbot'" class="btn-coming-soon">Join Server</button>
-      </div>
+      <div class="plans">
+        <div class="plan">
+          <h2>Free</h2>
+          <div class="price">Free</div>
+          <ul class="features">
+            <li>Kevin Bot taxi accounts</li>
+            <li>10 seconds cooldown</li>
+            <li>Standard Support</li>
+          </ul>
+          <button
+            onclick="window.location.href='https://discord.gg/kevinbot'"
+            class="btn-coming-soon"
+          >
+            Join Server
+          </button>
+        </div>
 
-      <div class="plan featured">
-        <h2>Premium User</h2>
-        <div class="price">$13</div>
-        <div class="lilshyt">lifetime!</div>
-        <ul class="features">
-          <li>All premium boost features</li>
-          <li>XMPP Custom status</li>
-          <li>Private Kevin Bot Taxi</li>
-          <li>Unlimited accounts</li>
-        </ul>
-        <button onclick="window.location.href='https://discord.gg/kevinbot'" class="btn">Buy Now</button>
-      </div>
+        <div class="plan featured">
+          <h2>Premium User</h2>
+          <div class="price">$13</div>
+          <div class="lilshyt">lifetime!</div>
+          <ul class="features">
+            <li>All premium boost features</li>
+            <li>XMPP Custom status</li>
+            <li>Private Kevin Bot Taxi</li>
+            <li>Unlimited accounts</li>
+          </ul>
+          <button
+            onclick="window.location.href='https://discord.gg/kevinbot'"
+            class="btn"
+          >
+            Buy Now
+          </button>
+        </div>
 
-      <div class="plan">
-        <h2>Premium Boost</h2>
-        <div class="price">$5<span class="slash-mo">/mo</span></div>
-        <ul class="features">
-        <li>All Basic Features</li>
-          <li>Premium commands</li>
-          <li>10 accounts</li>
-          <li>No cooldown</li>
-        </ul>
-        <button onclick="window.location.href='https://discord.gg/kevinbot'" class="btn-coming-soon">Boost server</button>
+        <div class="plan">
+          <h2>Premium Boost</h2>
+          <div class="price">$5<span class="slash-mo">/mo</span></div>
+          <ul class="features">
+            <li>All Basic Features</li>
+            <li>Premium commands</li>
+            <li>10 accounts</li>
+            <li>No cooldown</li>
+          </ul>
+          <button
+            onclick="window.location.href='https://discord.gg/kevinbot'"
+            class="btn-coming-soon"
+          >
+            Boost server
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-</body>
+  </body>
 </html>
