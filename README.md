@@ -4,7 +4,7 @@ A simple website built with HTML, CSS, and JavaScript.
 
 ## Overview
 
-This project is a cleanand lightweight. Its a website for a discord bot using vanilla JavaScript, HTML5, and CSS3. It's designed to be responsive and easy to customize.
+This project is a clean and lightweight. Its a website for a discord bot using vanilla JavaScript, HTML5, and CSS3. It's designed to be responsive and easy to customize.
 
 ## Features
 
